@@ -1,23 +1,5 @@
 const githuburl = "https://api.github.com/users/vinidotruan";
 
-const projects = [
-  { 
-    url: "https://github.com/vinidotruan/game-of-life", 
-    image: "https://raw.githubusercontent.com/vinidotruan/game-of-life/refs/heads/main/solo.gif",
-    title: "Game of Life 👾",
-    description: "Um jogo da vida pra testar minhas habilidades em golang e raylib.",
-  },{ 
-    url: "https://github.com/vinidotruan/game-of-life", 
-    image: "https://raw.githubusercontent.com/vinidotruan/game-of-life/refs/heads/main/solo.gif",
-    title: "Game of Life 👾",
-    description: "Teste 02",
-  },{ 
-    url: "https://github.com/vinidotruan/game-of-life", 
-    image: "https://raw.githubusercontent.com/vinidotruan/game-of-life/refs/heads/main/solo.gif",
-    title: "Game of Life 👾",
-    description: "Teste 03",
-  }
-];
 fetch(githuburl)
   .then(data => data.json())
   .then(data => {
@@ -45,30 +27,44 @@ function setBio(bio) {
 
 function loadProjects() {
   const projectsEl = document.getElementById("projects");
-  projects.forEach((value) => {
-    console.log(value)
-    const wrapper = document.createElement("div");
-    const imgWrapper = document.createElement("div");
-    const descriptionWrapper = document.createElement("div");
-    const descriptionEl = document.createElement("p");
-    const descriptionTitleEl = document.createElement("h3");
+  fetch("./data.json")
+    .then(response => response.json())
+    .then(projects => {
+      projects.forEach((value) => {
+        const wrapper = document.createElement("div");
+        const imgWrapper = document.createElement("div");
+        const descriptionWrapper = document.createElement("div");
+        const descriptionEl = document.createElement("p");
+        const descriptionTitleEl = document.createElement("h3");
+        const labels = value.labels;
+        const labelsWrapper = document.createElement("div");
 
+        wrapper.onclick = () => window.open(value.url, 'blank');
+        wrapper.className = "wrapper";
 
-    wrapper.className = "wrapper";
+        imgWrapper.className = "img-wrapper";
+        imgWrapper.style.backgroundImage = `url(${value.image})`;
 
-    imgWrapper.className = "img-wrapper";
-    imgWrapper.style.backgroundImage = `url(${value.image})`;
+        descriptionWrapper.className = "description";
+        descriptionEl.innerText = value.description;
+        descriptionTitleEl.innerText = value.title;
 
-    descriptionWrapper.className = "description";
-    descriptionEl.innerText = value.description;
-    descriptionTitleEl.innerText = value.title;
+        descriptionWrapper.appendChild(descriptionTitleEl);
+        descriptionWrapper.appendChild(descriptionEl);
+        wrapper.appendChild(imgWrapper);
+        wrapper.appendChild(descriptionWrapper);
 
-    descriptionWrapper.appendChild(descriptionTitleEl);
-    descriptionWrapper.appendChild(descriptionEl);
-    wrapper.appendChild(imgWrapper);
-    wrapper.appendChild(descriptionWrapper);
+        labelsWrapper.className = "label-wrapper";
 
-    projectsEl.appendChild(wrapper)
+        labels.forEach(label => {
+          const labelEl = document.createElement("small");
+          labelEl.innerText = label;
+          labelsWrapper.appendChild(labelEl);
+        })
+        
+        wrapper.appendChild(labelsWrapper);
+        projectsEl.appendChild(wrapper)
+      });
   });
 }
 

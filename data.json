@@ -1,0 +1,23 @@
+[
+  { 
+    "url": "https://github.com/vinidotruan/game-of-life", 
+    "image": "https://raw.githubusercontent.com/vinidotruan/game-of-life/refs/heads/main/solo.gif",
+    "title": "Game of Life 👾",
+    "labels": ["golang", "gamedev", "raylib"],
+    "description": "Conway's game of life pra testar habilidades em golang e raylib."
+  },
+  { 
+    "url": "https://github.com/vinidotruan/my-study-session", 
+    "image": "https://raw.githubusercontent.com/vinidotruan/my-study-session/main/public/typing.gif",
+    "title": "My Study Session ⏰",
+    "labels": ["php", "laravel", "websocket", "redis", "docker"],
+    "description": "Projeto feito para criar timers em conjunto, onde diversas pessoas podem estar em uma sessao de estudo sincronizadas."
+  },
+  { 
+    "url": "https://github.com/vinidotruan/hestia", 
+    "image": "https://raw.githubusercontent.com/vinidotruan/hestia/main/family.gif",
+    "title": "Hestia 🐕",
+    "labels": ["laravel", "php", "mysql"],
+    "description": "Projeto opensource para ajudar ongs a catalogar seus serviços, voluntários e horários."
+  }
+]
